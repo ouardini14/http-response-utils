@@ -1,6 +1,7 @@
 import { IResponse } from "./http";
 import { Response } from "./http";
 import { IServiceResponse } from "./service";
+import { HttpException } from '@nestjs/common';
 
 
 export function SuccefulResponse(data: any = {}): IResponse<any> {
@@ -47,5 +48,16 @@ export function ResponseBuilder(serviceResponse: IServiceResponse<any>): IRespon
     else
         return ErrorApi("UNKOWN ERROR")
 }
+
+export function HttpResponseBuilder<T>(serviceResponse: IServiceResponse<T>): IResponse<T> {
+    const response = ResponseBuilder(serviceResponse);
+
+    if (response.status >= 400) {
+        throw new HttpException(response, response.status);
+    }
+
+    return response;
+}
+
 
 export { IResponse } from "./http";
