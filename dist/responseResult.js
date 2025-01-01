@@ -19,7 +19,7 @@ function ErrorApi(service = "") {
     let response = new http_1.Response();
     response.status = 500;
     response.data = {};
-    response.mssg = "Error Service " + service;
+    response.mssg = service;
     return response;
 }
 function ErrorData(msg = "") {

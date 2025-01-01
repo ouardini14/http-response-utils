@@ -17,7 +17,7 @@ export function ErrorApi(service: string = ""): IResponse<any> {
     let response = new Response();
     response.status = 500;
     response.data = {};
-    response.mssg = "Error Service " + service;
+    response.mssg =  service;
     return response;
 }
 
