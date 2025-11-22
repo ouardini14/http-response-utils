@@ -49,7 +49,11 @@ function ResponseBuilder(serviceResponse) {
 function HttpResponseBuilder(serviceResponse) {
     const response = ResponseBuilder(serviceResponse);
     if (response.status >= 400) {
-        throw new common_1.HttpException(response, response.status);
+        throw new common_1.HttpException({
+            status: response.status,
+            data: response.data,
+            message: response.mssg,
+        }, response.status);
     }
     return response;
 }

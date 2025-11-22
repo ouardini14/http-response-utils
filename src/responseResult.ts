@@ -53,7 +53,11 @@ export function HttpResponseBuilder<T>(serviceResponse: IServiceResponse<T>): IR
     const response = ResponseBuilder(serviceResponse);
 
     if (response.status >= 400) {
-        throw new HttpException(response, response.status);
+        throw new HttpException({
+            status: response.status,
+            data: response.data,
+            message: response.mssg, 
+        }, response.status);
     }
 
     return response;
